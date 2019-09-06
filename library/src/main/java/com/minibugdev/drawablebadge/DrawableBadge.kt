@@ -110,7 +110,6 @@ class DrawableBadge private constructor(val context: Context,
 
 	fun get(counter: Int): Drawable {
 		val resources = context.resources
-		if (counter == 0) return BitmapDrawable(resources, bitmap)
 
 		val sourceBitmap = bitmap
 		val width = sourceBitmap.width
@@ -158,10 +157,9 @@ class DrawableBadge private constructor(val context: Context,
 		if (counter > max) {
 			textSize = badgeRect.height() * 0.45f
 			text = "$max+"
-		}
-		else {
+		} else {
 			textSize = badgeRect.height() * 0.55f
-			text = counter.toString()
+			text = if(counter == 0) "" else counter.toString()
 		}
 
 		val textPaint = TextPaint().apply {
